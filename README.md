@@ -10,7 +10,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 
 > grunt.loadNpmTasks('grunt-res-version');
 
-## resVerson task
+## resVersion task
 Run this task with the grunt copy command.
 Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
 
@@ -20,7 +20,7 @@ Don't need temporarily
 ### Usage Examples
 #### Copying without full path:
 ```js
-resVerson: {
+resVersion: {
    main: {
      files: [
        {
