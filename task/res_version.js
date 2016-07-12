@@ -15,7 +15,7 @@ module.exports = function (grunt){
         crypto = require('crypto'),
         fileList = new Array();
 
-    //¹ã¶ÈÓÅÏÈ
+    //å¹¿åº¦ä¼˜å…ˆ
     function trave(dirL){
         var dList = dirL;
         if(dirL.length == 0){
@@ -29,9 +29,9 @@ module.exports = function (grunt){
                     var states = fs.statSync(dir + '/' + file);
                     if (states.isDirectory()) {
                         dList.push(dir + file);
-                    } else {//ÎÄ¼ş
+                    } else {//æ–‡ä»¶
                         fileList.push(dir + '/' + file);
-                        //²éÕÒÀïÃæ¾²Ì¬×ÊÔ´µÄÂ·¾¶
+                        //æŸ¥æ‰¾é‡Œé¢é™æ€èµ„æºçš„è·¯å¾„
                         findFile(dir, dir + '/' + file);
                     }
                 });
@@ -41,27 +41,27 @@ module.exports = function (grunt){
         }
     }
 
-//²éÕÒÄ£°åÀï¾²Ì¬×ÊÔ´Â·¾¶£¬¼ÆËã¾²Ì¬×ÊÔ´md5
+//æŸ¥æ‰¾æ¨¡æ¿é‡Œé™æ€èµ„æºè·¯å¾„ï¼Œè®¡ç®—é™æ€èµ„æºmd5
     function findFile(dir, file){
 
         var templateData = fs.readFileSync(file,"utf-8"),
-            dirArray = templateData.toString().replace(/[\r\n]/g,'').match(/(src=|href=)\"([^\"]*)\"/g),//Ä£°åÀïÃæËùÓĞ¾²Ì¬×ÊÔ´Â·¾¶
-            srcTable = new Array();//¾²Ì¬×ÊÔ´Â·¾¶£¬ÒÑ¾­md5±í
+            dirArray = templateData.toString().replace(/[\r\n]/g,'').match(/(src=|href=)\"([^\"]*)\"/g),//æ¨¡æ¿é‡Œé¢æ‰€æœ‰é™æ€èµ„æºè·¯å¾„
+            srcTable = new Array();//é™æ€èµ„æºè·¯å¾„ï¼Œå·²ç»md5è¡¨
         //console.log(dirArray);
 
-        //ÄÑµã£ºÖªµÀÄ£°å¾ø¶ÔÂ·¾¶£¬ÖªµÀÄ£°åÀïÃæ¾²Ì¬×ÊÔ´Ïà¶ÔÂ·¾¶£¬Çó¾²Ì¬×ÊÔ´¾ø¶ÔÂ·¾¶
+        //éš¾ç‚¹ï¼šçŸ¥é“æ¨¡æ¿ç»å¯¹è·¯å¾„ï¼ŒçŸ¥é“æ¨¡æ¿é‡Œé¢é™æ€èµ„æºç›¸å¯¹è·¯å¾„ï¼Œæ±‚é™æ€èµ„æºç»å¯¹è·¯å¾„
         if(dirArray){
 
             for(var i = 0; i <= dirArray.length; i++){
                 if(dirArray[i]){
                     var htdocFile = dirArray[i].replace('src=\"', '').replace('\"', ''),
-                        filePath = path.resolve(dir, htdocFile);//¾²Ì¬×ÊÔ´ËùÔÚÄ¿Â¼¾ø¶ÔÂ·¾¶
+                        filePath = path.resolve(dir, htdocFile);//é™æ€èµ„æºæ‰€åœ¨ç›®å½•ç»å¯¹è·¯å¾„
                     var fileData = fs.readFileSync(filePath, 'utf-8'),
                         md5sum = crypto.createHash('md5');
                     md5sum.update(fileData);
                     var srcTableEle = {
-                        title: htdocFile,//Ä£°åÀïÃæµÄÂ·¾¶
-                        md5: md5sum.digest('hex')//Ò»µ©digest±»µ÷ÓÃ£¬hash¶ÔÏó¾Í»á±»Çå¿Õ£¬²»ÄÜ±»ÖØÓÃ
+                        title: htdocFile,//æ¨¡æ¿é‡Œé¢çš„è·¯å¾„
+                        md5: md5sum.digest('hex')//ä¸€æ—¦digestè¢«è°ƒç”¨ï¼Œhashå¯¹è±¡å°±ä¼šè¢«æ¸…ç©ºï¼Œä¸èƒ½è¢«é‡ç”¨
                     };
 
                     srcTable.push(srcTableEle);
@@ -74,7 +74,7 @@ module.exports = function (grunt){
         }
     }
 
-//Ìæ»»Ä£°åÀïÃæ¾²Ì¬×ÊÔ´Â·¾¶£¬ºóÃæ¼Ó?m=md5
+//æ›¿æ¢æ¨¡æ¿é‡Œé¢é™æ€èµ„æºè·¯å¾„ï¼Œåé¢åŠ ?m=md5
     function md5Replace(tempFile, srcTable){
         //console.log('md5Replace tempFile ' + tempFile);
         //console.log('md5Replace srcTable ' + tempFile);
