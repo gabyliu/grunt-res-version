@@ -41,3 +41,8 @@ Here are some additional examples, given the following development directory tre
 |-template//dist directory for template 
 |-htdocs//dist directory for htdocs
 ```
+
+run 
+```js
+grunt resVersion
+```
