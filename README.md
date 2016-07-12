@@ -8,19 +8,34 @@ If you haven't used [Grunt](http://www.gruntjs.net/) before, be sure to check ou
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 > grunt.loadNpmTasks('grunt-res-version');
 
-## res_verson task
+## resVerson task
+Run this task with the grunt copy command.
+Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
 
 ### Options
-null
+Don't need temporarily
 
 ### Usage Examples
-` res_version: {
+#### Copying without full path:
+```js
+resVerson: {
    main: {
      files: [
        {
-         src: ['template/zh_CN/htmledition/'],
-         dest: 'template/zh_CN/htmledition/'
+         src: ['template/'],
+         dest: 'template/'
        }
      ]
    }
-}`
+}
+```
+
+Here are some additional examples, given the following development directory tree:
+```js
+|-src//development directory
+|  |-template
+|  |-htdocs
+|-Gruntfile.js
+|-template//dist directory for template 
+|-htdocs//dist directory for htdocs
+```
