@@ -1,0 +1,53 @@
+{
+  "name": "grunt-res-version",
+  "description": "Static resource path to add the version number",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gruntjs/grunt-res-version",
+  "author": {
+    "name": "GabyLiu",
+    "url": "https://github.com/gruntjs/grunt-res-version"
+  },
+  "bugs": {
+    "url": "https://github.com/gruntjs/grunt-res-version/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/gruntjs/grunt-res-version/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 5.1.0"
+  },
+  "scripts": {
+    "test": "grunt res"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "files": [
+    "tasks",
+    "LICENSE-MIT"
+  ],
+  "_id": "grunt-res-version@0.0.1",
+  "_from": "grunt-res-version@*",
+  "_npmVersion": "3.3.12",
+  "_npmUser": {
+    "name": "gabyliu",
+    "email": "1198695124@qq.com"
+  },
+  "maintainers": [
+    {
+      "name": "gabyliu",
+      "email": "1198695124@qq.com"
+    }
+  ],
+  "directories": {},
+  "readme": "ERROR: No README data found!"
+}
