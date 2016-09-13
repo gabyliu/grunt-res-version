@@ -1,18 +1,18 @@
 {
   "_args": [
     [
-      "grunt-res-version@0.1.0",
+      "grunt-res-version@0.1.1",
       "E:\\managerweb"
     ]
   ],
-  "_from": "grunt-res-version@0.1.0",
+  "_from": "grunt-res-version@0.1.1",
   "_inCache": true,
   "_installable": true,
-  "_location": "/grunt-version",
+  "_location": "/grunt-res-version",
   "_nodeVersion": "5.1.0",
   "_npmOperationalInternal": {
     "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/grunt-version-0.0.5.tgz_1468329516808_0.8223387505859137"
+    "tmp": "tmp/grunt-res-version-0.0.5.tgz_1468329516808_0.8223387505859137"
   },
   "_npmUser": {
     "email": "1198695124@qq.com",
@@ -21,8 +21,8 @@
   "_npmVersion": "3.3.12",
   "_phantomChildren": {},
   "_requested": {
-    "name": "grunt-version",
-    "raw": "grunt-version@0.0.5",
+    "name": "grunt-res-version",
+    "raw": "grunt-res-version@0.1.1",
     "rawSpec": "0.0.5",
     "scope": null,
     "spec": "0.0.5",
@@ -33,11 +33,11 @@
   ],
   "_shasum": "cd560ebfc04b80ff8ec882826347dc682d5ab685",
   "_shrinkwrap": null,
-  "_spec": "grunt-version@0.0.5",
+  "_spec": "grunt-res-version@0.1.1",
   "_where": "E:\\managerweb",
-  "author": "GabyLiu (https://github.com/gruntjs/grunt-version)",
+  "author": "GabyLiu (https://github.com/gruntjs/grunt-res-version)",
   "bugs": {
-    "url": "https://github.com/gruntjs/grunt-version/issues"
+    "url": "https://github.com/gruntjs/grunt-res-version/issues"
   },
   "dependencies": {},
   "description": "Static resource path to add the version number",
@@ -49,7 +49,7 @@
   },
   "dist": {
     "shasum": "cd560ebfc04b80ff8ec882826347dc682d5ab685",
-    "tarball": "https://registry.npmjs.org/grunt-version/-/grunt-version-0.0.5.tgz"
+    "tarball": "https://registry.npmjs.org/grunt-res-version/-/grunt-res-version-0.0.5.tgz"
   },
   "engines": {
     "node": ">= 5.1.0"
@@ -85,5 +85,5 @@
   "scripts": {
     "test": "grunt res"
   },
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
