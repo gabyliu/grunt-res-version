@@ -1,5 +1,10 @@
 # grunt-res-version
+这个插件用于计算静态资源的md5，并替换模板里静态资源的路径。
 This plugin for update static resource version and the path of static resources in template.
+
+![example](http://mmbiz.qpic.cn/mmemoticon/Q3auHgzwzM6Mc3PlejPjtibhNuia6ib224FiaQAvicJapEJQHT17H3698Q2wZ8PibrurXJ/0)
+This is the result of the template has been modified.
+ 
 ## Getting Started
 This plugin requires Grunt ~0.4.0
 
@@ -10,39 +15,47 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 
 > grunt.loadNpmTasks('grunt-res-version');
 
-## resVersion task
+## version task
 Run this task with the grunt copy command.
 Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
 
+
+## Setting items
+这个插件只需要两个配置项
+This plugin just need two setting items.
+
+
+### filesSrc
+Type: `Array`
+模板目录。这里源目录和目标目录是一样的。
+The directories of template.It is important to note the source directory and the target directory is the same.
+
 ### Options
-Don't need temporarily
+#### ext
+Type: `String`
+这是一个字符串形式的正则表达式。
+This option is a string of regular expressions
 
 ### Usage Examples
 #### Copying without full path:
 ```js
-resVersion: {
-   main: {
-     files: [
-       {
-         src: ['template/'],
-         dest: 'template/'
-       }
-     ]
-   }
+version: {
+    main: {
+		options: {
+			ext: '/(.jpg)$|(.jpeg)$|(.png)|(.css)$|(.js)$/ig'
+		},
+		filesSrc: ['template/']
+	}
 }
 ```
 
+
 Here are some additional examples, given the following development directory tree:
 ```js
-|-src//development directory
+|-src//source directory
 |  |-template
 |  |-htdocs
 |-Gruntfile.js
-|-template//dist directory for template 
-|-htdocs//dist directory for htdocs
-```
-
-run 
-```js
-grunt resVersion
+|-template//target directory for template
+|-htdocs//target directory for htdocs
 ```
