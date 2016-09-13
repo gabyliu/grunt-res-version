@@ -1,53 +1,89 @@
 {
-  "name": "grunt-res-version",
-  "description": "Static resource path to add the version number",
-  "version": "0.0.1",
-  "homepage": "https://github.com/gruntjs/grunt-res-version",
-  "author": {
-    "name": "GabyLiu",
-    "url": "https://github.com/gruntjs/grunt-res-version"
+  "_args": [
+    [
+      "grunt-res-version@0.1.0",
+      "E:\\managerweb"
+    ]
+  ],
+  "_from": "grunt-res-version@0.1.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/grunt-version",
+  "_nodeVersion": "5.1.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/grunt-version-0.0.5.tgz_1468329516808_0.8223387505859137"
   },
+  "_npmUser": {
+    "email": "1198695124@qq.com",
+    "name": "gabyliu"
+  },
+  "_npmVersion": "3.3.12",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "grunt-version",
+    "raw": "grunt-version@0.0.5",
+    "rawSpec": "0.0.5",
+    "scope": null,
+    "spec": "0.0.5",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_shasum": "cd560ebfc04b80ff8ec882826347dc682d5ab685",
+  "_shrinkwrap": null,
+  "_spec": "grunt-version@0.0.5",
+  "_where": "E:\\managerweb",
+  "author": "GabyLiu (https://github.com/gruntjs/grunt-version)",
   "bugs": {
-    "url": "https://github.com/gruntjs/grunt-res-version/issues"
+    "url": "https://github.com/gruntjs/grunt-version/issues"
   },
+  "dependencies": {},
+  "description": "Static resource path to add the version number",
+  "devDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dist": {
+    "shasum": "cd560ebfc04b80ff8ec882826347dc682d5ab685",
+    "tarball": "https://registry.npmjs.org/grunt-version/-/grunt-version-0.0.5.tgz"
+  },
+  "engines": {
+    "node": ">= 5.1.0"
+  },
+  "files": [
+    "LICENSE-MIT",
+    "tasks"
+  ],
+  "homepage": "https://github.com/gruntjs/grunt-res-version",
+  "keywords": [
+    "gruntplugin"
+  ],
+  "license": "ISC",
   "licenses": [
     {
       "type": "MIT",
       "url": "https://github.com/gruntjs/grunt-res-version/blob/master/LICENSE-MIT"
     }
   ],
-  "engines": {
-    "node": ">= 5.1.0"
+  "main": "Gruntfile.js",
+  "maintainers": [
+    "gabyliu <1198695124@qq.com>"
+  ],
+  "name": "grunt-res-version",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabyliu/grunt-res-version.git"
   },
   "scripts": {
     "test": "grunt res"
   },
-  "devDependencies": {
-    "grunt": "~0.4.0"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.0"
-  },
-  "keywords": [
-    "gruntplugin"
-  ],
-  "files": [
-    "tasks",
-    "LICENSE-MIT"
-  ],
-  "_id": "grunt-res-version@0.0.1",
-  "_from": "grunt-res-version@*",
-  "_npmVersion": "3.3.12",
-  "_npmUser": {
-    "name": "gabyliu",
-    "email": "1198695124@qq.com"
-  },
-  "maintainers": [
-    {
-      "name": "gabyliu",
-      "email": "1198695124@qq.com"
-    }
-  ],
-  "directories": {},
-  "readme": "ERROR: No README data found!"
+  "version": "0.1.0"
 }
