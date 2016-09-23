@@ -1,8 +1,12 @@
 # grunt-res-version
 这个插件用于计算静态资源的md5，并替换模板里静态资源的路径。
+
 This plugin for update static resource version and the path of static resources in template.
 
-![example](http://mmbiz.qpic.cn/mmemoticon/Q3auHgzwzM6Mc3PlejPjtibhNuia6ib224FiaQAvicJapEJQHT17H3698Q2wZ8PibrurXJ/0)
+![example](http://mmbiz.qpic.cn/mmemoticon/MxlUWr5LG0xLdJpJ4f1HzEa4rIc7cVJPgJ6DgbQiaVfqS8iarTaqXEoHbEEGg9aWG2/0)
+
+这是构建后的结果。
+
 This is the result of the template has been modified.
  
 ## Getting Started
@@ -21,28 +25,50 @@ Task targets, files and options may be specified according to the grunt [Configu
 
 
 ## Setting items
-这个插件只需要两个配置项
-This plugin just need two setting items.
+这个插件只有一个必填项，两个选填项。
+
+This plugin is only one mandatory, two optional.
 
 
 ### filesSrc
 Type: `Array`
+
 模板目录。这里源目录和目标目录是一样的。
+
 The directories of template.It is important to note the source directory and the target directory is the same.
 
 ### Options
 #### ext
 Type: `String`
-这是一个字符串形式的正则表达式。
-This option is a string of regular expressions
+
+Default: `'/(.jpg)$|(.jpeg)$|(.png)|(.css)$|(.js)$/ig'`
+
+这是一个字符串形式的正则表达式。用来筛选要被计算md5的文件。
+
+This option is a string of regular expressions used to filter needs to be calculated md5 file.
+
+#### fileNameVersion
+Type: `String`
+
+Default: `'/(.js)$/ig'`
+
+这是一个字符串形式的正则表达式。用来筛选需要在文件名中加md5的文件。
+
+This option is a string of regular expressions used to filter files which needs to be added md5 in file name.
+
+**Example**
+```javascript
+fileNameVersion: '/(.css)$/ig'
+```
+![example](http://mmbiz.qpic.cn/mmemoticon/ajNVdqHZLLBwiblWwKUMqG9iaUwdhOE7W7pcqoKOTUR9KE6NwVbCh0iamlGUia7SUZATKdSIO2JHWibf78DiacHK8Mibg/0)
 
 ### Usage Examples
 #### Copying without full path:
-```js
+```javascript
 version: {
     main: {
-		options: {
-			ext: '/(.jpg)$|(.jpeg)$|(.png)|(.css)$|(.js)$/ig'
+        options: {
+    		ext: '/(.jpg)$|(.jpeg)$|(.png)|(.css)$|(.js)$/ig'
 		},
 		filesSrc: ['template/']
 	}
@@ -51,7 +77,7 @@ version: {
 
 
 Here are some additional examples, given the following development directory tree:
-```js
+```javascript
 |-src//source directory
 |  |-template
 |  |-htdocs
@@ -59,3 +85,5 @@ Here are some additional examples, given the following development directory tre
 |-template//target directory for template
 |-htdocs//target directory for htdocs
 ```
+
+
