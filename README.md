@@ -68,6 +68,7 @@ fileNameVersion: '/(.css)$/ig'
 version: {
     main: {
         options: {
+        	fileNameVersion: '/(.css)$/ig',
     		ext: '/(.jpg)$|(.jpeg)$|(.png)|(.css)$|(.js)$/ig'
 		},
 		filesSrc: ['template/']
