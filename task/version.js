@@ -14,65 +14,99 @@ module.exports = function (grunt){
         mapFileMd5 = {};
 		
     grunt.registerMultiTask('version', 'Static resource path to add the version number', function(opt){
-        //grunt 缺省 option
+        //grunt default option
         var options = this.options({
-                ext: '/(.jpg)$|(.jpeg)$|(.png)|(.css)$|(.js)$/ig' //如果gruntfile那里有配置值，会覆盖这里的
+				fileNameVersion: '/(.js)$/ig',
+				ext: '/(.jpg)$|(.jpeg)$|(.png)|(.css)$|(.js)$/ig' //rule to which files will be caculated
             }),
 			startTime = new Date(),
 			totalTime,
-			totalTemp = 0,//统计总共修改了多少个模板
-			srcTable = [];//静态资源路径hashtable
-			
-		//遍历所有模板
+			totalTemp = 0,//A total of how many files are computed
+			srcTable = [],//¾²Ì¬×ÊÔ´Â·¾¶hashtable
+			fileReg = eval(options.ext);
+		
+		
 		var tempMethod = {
-			//查找模板里静态资源路径，计算静态资源md5
+			//open file and find all links
 			findFile: function(dir, fileDir){
-				var fileReg = eval(options.ext);
 				var dataFile = fs.readFileSync(fileDir,"utf-8"),
-					resDirArray = dataFile.toString().replace(/[\r\n]/g,'').match(/(src=|href=)\"([^\"]*)\"/g);//获取模板里面所有静态资源路径
+					resDirArray = dataFile.toString().replace(/[\r\n]/g,'').match(/(src=|href=)\"([^\"]*)\"/g),//Collect all the links
+					currentSrcTale = [];
 				resDirArray ? resDirArray = resDirArray : resDirArray = [];
 
 				resDirArray.forEach(function(listEle){
 					var resDir = listEle.replace(/(src=)|(href=)|(\")/ig,'');
-					if(fileReg.test(resDir)){//要计算的文件
-						var resPath = path.resolve(dir, resDir),//绝对路径
+
+					var isMatch = !!resDir.match(fileReg);
+
+					if(isMatch){//check is match the rule of which files will be caculated
+						var resPath = path.resolve(dir, resDir),//
 							srcTableEle = {
-								title: resDir,//模板里面的路径
-								md5: null//一旦digest被调用，hash对象就会被清空，不能被重用
+								title: resDir,//change relative paths to absolute paths
+								md5: null//init value, include two variable: md5 and isFileName
 							};
 						
 						mapFileMd5[resPath] ? null : mapFileMd5[resPath] = tempMethod.countMd5(resPath);
 						
 						srcTableEle.md5 = mapFileMd5[resPath];
+						currentSrcTale.push(srcTableEle);
 						srcTable.push(srcTableEle);
-						
 					}
-
 				});
-				tempMethod.md5Replace(fileDir, srcTable);
+				
+				tempMethod.md5Replace(fileDir, currentSrcTale);
 				++totalTemp;
 			},
-			//计算静态资源md5
+			//caculate md5 and modify files' name
 			countMd5: function(filePath){
-				var folder_exists = fs.existsSync(filePath);
-				if(folder_exists){
+				var fileValue = {
+						isFileName: false,
+						md5: null,
+					}, 
+					fileReg = eval(options.fileNameVersion),
+					folder_exists = fs.existsSync(filePath);
+
+				if(folder_exists){//according to the path to determine whether a file exists
 					var fileData = fs.readFileSync(filePath, 'utf-8'),
 					md5sum = crypto.createHash('md5');
 					md5sum.update(fileData);
-					var md5 = md5sum.digest('hex');
-					return md5;
+					fileValue.md5 = md5sum.digest('hex');
+
+					if(fileReg.test(filePath)){//determine whether to rename files
+						fileValue.isFileName = true;
+						var newPath = filePath.replace(fileReg, '') + '.' + fileValue.md5 + path.extname(filePath);
+				        fs.rename(filePath, newPath, function(err) {
+				            if (!err) {
+				                grunt.log.warn('rename ' + filePath + 'fail');
+				            }       
+				        })
+					}
+					return fileValue;
+				}else{
+					grunt.log.warn('not exist ' + filePath);
 				}
-				return '';  
+				return null;  
 			},
-			//替换模板里面静态资源路径，后面加?m=md5
+			//modified links in html
 			md5Replace: function(tempFile, srcTable){
 				var tempData = fs.readFileSync(tempFile,"utf-8").toString();
 				for(var i = 0; i < srcTable.length; i++){
-					tempData = tempData.replace(srcTable[i].title, srcTable[i].title + '?m=' + srcTable[i].md5);
+					if(srcTable[i].md5){
+						
+						if(srcTable[i].md5.isFileName){
+							tempData = tempData.replace(srcTable[i].title, path.dirname(srcTable[i].title) + '/' + path.basename(srcTable[i].title).replace(eval(options.fileNameVersion), '') + '.' + srcTable[i].md5.md5 + path.extname(srcTable[i].title));
+						}else{
+							tempData = tempData.replace(srcTable[i].title, srcTable[i].title + '?m=' + srcTable[i].md5.md5);
+						}
+					
+					}
+					
 				}
 				grunt.file.write(tempFile, tempData);
 			}
 		};
+
+		//enter function
 		function trave(dirL){
 			var dList = dirL;
 			if(dirL.length == 0){
@@ -82,7 +116,7 @@ module.exports = function (grunt){
 				dList.forEach(function(dirListEle){
 					grunt.file.recurse(dirListEle, function(abspath, rootdir, subdir, filename){
 
-						htmlReg.test(abspath) ? tempMethod.findFile(rootdir + subdir, abspath) : null;//判断是否是html，是的话拿去计算路径
+						htmlReg.test(abspath) ? tempMethod.findFile(rootdir + subdir, abspath) : null;//Only check the links in the HTML
 					});
 					dList.shift();
 				})
